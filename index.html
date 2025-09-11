@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ECAS & Volterra — Prezentacija</title>
+  <meta name="description" content="ECAS i Volterra" />
+  <style>
+    :root{ --bg:#0f1221; --card:#151834; --muted:#9aa3b2; --text:#e9edf5; --accent:#7c5cff; --accent-2:#00d4ff; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{ margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif; background:radial-gradient(1200px 600px at 20% -10%, rgba(124,92,255,.15), transparent 60%), radial-gradient(1000px 600px at 100% 0%, rgba(0,212,255,.12), transparent 50%), var(--bg); color:var(--text); line-height:1.6; }
+    .container{width:min(1200px, 94vw); margin-inline:auto;}
+    header{padding:32px 0 12px; position:sticky; top:0; backdrop-filter:saturate(140%) blur(8px); background:linear-gradient(to bottom, rgba(15,18,33,.9), rgba(15,18,33,.6) 70%, transparent); z-index:10;}
+    .spacer {height: 100px; }
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:12px}
+    .brand{font-weight:700; letter-spacing:.3px}
+    .badge{display:inline-flex; gap:8px; align-items:center; padding:6px 10px; border-radius:999px; background:rgba(124,92,255,.12); border:1px solid rgba(124,92,255,.25); font-size:.85rem;}
+    .hero{display:grid; gap:18px; padding:28px 0 40px}
+    .hero h1{font-size:clamp(1.7rem, 3.2vw + 1rem, 3rem); line-height:1.2; margin:0}
+    .muted{color:var(--muted)}
+    .grid{display:grid; gap:32px; align-items:stretch}
+    @media(min-width:900px){.grid-2{grid-template-columns:1fr 1fr}}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .card.has-action{
+      justify-content:flex-start;
+      min-height:320px;
+    }
+    .card-inner{padding:26px; padding-bottom:16px; flex:1}
+    .pill{display:inline-flex; align-items:center; gap:8px; font-size:.8rem; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);}
+    .row{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+    .thumbs{display:grid; grid-template-columns:1fr; gap:14px}
+    @media(min-width:700px){.thumbs{grid-template-columns:1fr 1fr}}
+    .thumb{ border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,.08); background:#0b0d1a; position:relative; aspect-ratio:16/10; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+    .thumb img{width:100%; height:100%; object-fit:cover; display:block}
+    .thumb::after{content:"Povećaj"; position:absolute; inset:auto 8px 8px auto; background:rgba(0,0,0,.55); color:#fff; font-size:.75rem; padding:4px 8px; border-radius:8px}
+    .video-trigger{
+      cursor:pointer;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:8px;
+      margin-top:1rem;
+      padding-bottom: 16px;
+    }
+    .video-trigger img{max-width:200px; border-radius:12px; border:1px solid rgba(255,255,255,.1); background:#0b0d1a;}
+    .video-trigger span{font-size:.9rem; color:var(--muted)}
+    .modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(5,7,14,.78);
+      z-index:50;
+      padding:24px;
+    }
+    .modal[open]{display:flex}
+    .dialog{
+      width:auto;
+      max-width:92vw;
+      max-height:92vh;
+      background:#060815;
+      border:1px solid rgba(255,255,255,.15);
+      border-radius:16px;
+      overflow:hidden;
+    }
+    .dialog header{position:relative; backdrop-filter:none; background:transparent; padding:12px 14px}
+    .dialog h3{margin:0; font-size:1rem; color:var(--muted)}
+    .close{position:absolute; right:10px; top:10px; border:none; background:rgba(255,255,255,.06); color:#fff; padding:8px 10px; border-radius:10px; cursor:pointer}
+    .video-wrap, .image-wrap{background:#000}
+    .video-wrap iframe,
+    .video-wrap video{
+      display:block;
+      width:100%;
+      height:60vh;
+      max-height:78vh;
+      object-fit:contain;
+    }
+    .image-wrap img{
+      display:block;
+      width:auto;
+      height:auto;
+      max-width:90vw;
+      max-height:80vh;
+      object-fit:contain;
+      margin-inline:auto;
+    }
+    .thumbs{
+      margin-top:1rem;
+    }
+    .card-inner.action{
+      flex:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    footer{opacity:.8; font-size:.9rem; padding:28px 0 60px}
+    a{color:#b9c7ff}
+  </style>
+</head>
+<body>
+  <header class="spacer"></header>
+  <main class="container">
+    <section class="hero">
+      <h1>ECAS & Volterra</h1>
+    </section>
+    <section class="grid grid-2">
+      <article class="card has-action" id="ecas">
+        <div class="card-inner">
+          <div class="pill">ECAS</div>
+          <h2 style="margin:10px 0 6px">Promo video</h2>
+        </div>
+        <div class="card-inner action">
+          <div class="video-trigger" data-video="./ECAS%20promo%20v3.mp4" aria-controls="modal" aria-haspopup="dialog">
+            <img src="./ECAS_logo.png" alt="ECAS logo" />
+            <span>Klikni za video</span>
+          </div>
+        </div>
+      </article>
+
+        <article class="card has-action" id="volterra">
+        <div class="card-inner">
+          <div class="pill">Volterra</div>
+          <h2 style="margin:10px 0 6px">Volterra (Uskoro dostupno)</h2>
+          <p class="muted">Simulator tehničkih i financijskih učinaka hibridnog sustava PV + BESS.</p>
+        </div>
+        <div class="card-inner action">
+          <div class="thumbs">
+            <button class="thumb" data-image="./SoC&CS.png" aria-label="Otvori"><img src="./SoC&CS.png" alt="Volterra — SoC&CS" loading="lazy"></button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <footer class="container">
+      <p class="muted">© <span id="year"></span> Tachyon d.o.o.</p>
+    </footer>
+  </main>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="dialog" role="document">
+      <header>
+        <h3 id="modal-title">Pregled</h3>
+        <button class="close" data-close aria-label="Zatvori">✕</button>
+      </header>
+      <div class="video-wrap" hidden></div>
+      <div class="image-wrap" hidden>
+        <img alt="Prikaz slike" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const bySel = s => document.querySelector(s);
+    const $$ = s => Array.from(document.querySelectorAll(s));
+    const modal = bySel('#modal');
+    const videoWrap = bySel('.video-wrap');
+    const imageWrap = bySel('.image-wrap');
+    const imageEl = imageWrap.querySelector('img');
+    bySel('#year').textContent = new Date().getFullYear();
+
+    $$('#ecas .video-trigger').forEach(el => {
+      el.addEventListener('click', () => openModal({ type: 'video', src: el.dataset.video }));
+    });
+
+    $$('#volterra .thumb').forEach(btn => {
+      btn.addEventListener('click', () => openModal({ type: 'image', src: btn.dataset.image, alt: btn.querySelector('img')?.alt || 'Screenshot' }));
+    });
+
+    function openModal({ type, src, alt }){
+      cleanupModal();
+      if(type === 'video'){
+        videoWrap.hidden = false;
+        if(/\.mp4($|\?)/i.test(src)){
+          const video = document.createElement('video');
+          video.controls = true; video.autoplay = true; video.src = src; video.playsInline = true;
+          videoWrap.appendChild(video);
+        } else {
+          const iframe = document.createElement('iframe');
+          iframe.setAttribute('allow','autoplay; encrypted-media; picture-in-picture');
+          iframe.setAttribute('allowFullscreen','');
+          iframe.setAttribute('title','Promo video');
+          iframe.width = '100%'; iframe.height = '100%';
+          iframe.src = src;
+          videoWrap.appendChild(iframe);
+        }
+      } else if(type === 'image'){
+        imageWrap.hidden = false; imageEl.src = src; if(alt) imageEl.alt = alt;
+      }
+      modal.toggleAttribute('open', true);
+      modal.removeAttribute('aria-hidden');
+      document.addEventListener('keydown', onEscClose);
+      modal.addEventListener('click', onBackdropClose);
+    }
+
+    function cleanupModal(){
+      videoWrap.hidden = true; imageWrap.hidden = true; imageEl.removeAttribute('src');
+      videoWrap.querySelectorAll('iframe, video').forEach(n => n.remove());
+    }
+    function closeModal(){ cleanupModal(); modal.removeAttribute('open'); modal.setAttribute('aria-hidden','true'); document.removeEventListener('keydown', onEscClose); modal.removeEventListener('click', onBackdropClose); }
+    function onEscClose(e){ if(e.key === 'Escape') closeModal(); }
+    function onBackdropClose(e){ if(e.target === modal || e.target.hasAttribute('data-close')) closeModal(); }
+    bySel('[data-close]').addEventListener('click', closeModal);
+  </script>
+</body>
+</html>
