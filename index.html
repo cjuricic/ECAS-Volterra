@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ECAS - Web Application Showcase</title>
+  <style>
+    /* Reset & basic styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", Arial, sans-serif;
+      background: linear-gradient(135deg, #f8f9fb, #e8ecf3);
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #2c3e50;
+      letter-spacing: 0.5px;
+    }
+
+    p {
+      color: #555;
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+
+    video {
+      width: 100%;
+      max-width: 800px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      background: #000;
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ECAS - Web Application Showcase</h1>
+    <p>Demonstration video of the ECAS system</p>
+  </header>
+
+  <main>
+    <video controls poster="thumbnail.jpg">
+      <source src="ECAS_promo_v3.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </main>
+
+  <footer>
+    &copy; 2025 ECAS Project Team
+  </footer>
+</body>
+</html>
